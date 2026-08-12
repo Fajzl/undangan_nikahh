@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta property="og:image" content="https://fajzl.github.io/undangan_nikahh/image.jpg">
+
+<!-- ===== KUSTOMISASI THUMBNAIL (LINK PREVIEW) ===== -->
+<!-- Ganti URL di bawah dengan URL gambar thumbnail Anda (rekomendasi 1200x630px) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Wedding of — Azka & Kirana">
+<meta property="og:description" content="Sunday, July 26, 2026 - Gedung Serba Guna Banjarmasin">
+<meta property="og:image" content="https://z-cdn-media.chatglm.cn/files/9ad4c3fd-d77e-4ae4-a8d7-ad7febde7233.png?auth_key=1885845280-6a5cfedd98104ce796e2ef90eb3b4120-0-edc6dca5ea9f02f1bc8ea6f841b41788">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://fajzl.github.io/undangan_nikahh/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Wedding of — Azka & Kirana">
+<meta name="twitter:description" content="Sunday, July 26, 2026 - Gedung Serba Guna Banjarmasin">
+<meta name="twitter:image" content="https://z-cdn-media.chatglm.cn/files/9ad4c3fd-d77e-4ae4-a8d7-ad7febde7233.png?auth_key=1885845280-6a5cfedd98104ce796e2ef90eb3b4120-0-edc6dca5ea9f02f1bc8ea6f841b41788">
+
 <title>The Wedding of — Azka & Kirana</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,6 +117,20 @@
   .corner-tr{top:-1px;right:-1px;border-left:none;border-bottom:none;}
   .corner-bl{bottom:-1px;left:-1px;border-right:none;border-top:none;}
 
+  /* Cover Thumbnail (Customizable) */
+  .cover-thumbnail{
+    width:120px;height:120px;border-radius:50%;
+    overflow:hidden;margin:0 auto 1.5rem;
+    border:2px solid var(--gold-soft);
+    box-shadow:0 0 25px rgba(217,181,114,.5), inset 0 0 0 4px rgba(0,0,0,.2);
+    position:relative;
+    animation:gentleBounce 2.5s ease-in-out infinite;
+  }
+  .cover-thumbnail img{
+    width:100%;height:100%;object-fit:cover;
+    filter:sepia(.1) saturate(1.1) brightness(1.05);
+  }
+
   /* Open button */
   .open-btn{
     margin-top:2rem;
@@ -187,9 +215,9 @@
     filter:sepia(.12) saturate(1.05);
   }
 
-  /* Music button */
-  .music-btn{
-    position:fixed;bottom:20px;right:20px;
+  /* Music & Custom button */
+  .music-btn, .custom-btn{
+    position:fixed;bottom:20px;
     width:48px;height:48px;border-radius:50%;
     background:linear-gradient(135deg,var(--wine) 0%,var(--wine-2) 100%);
     color:var(--gold-soft);border:1px solid var(--gold);
@@ -198,9 +226,30 @@
     box-shadow:0 6px 20px rgba(74,20,25,.4);
     transition:all .3s;
   }
-  .music-btn:hover{transform:scale(1.08);}
+  .music-btn{right:20px;}
+  .custom-btn{left:20px;}
+  .music-btn:hover, .custom-btn:hover{transform:scale(1.08);}
+  .custom-btn:hover{transform:rotate(90deg) scale(1.05);}
   .music-btn.playing i{animation:musicSpin 3s linear infinite;}
   @keyframes musicSpin{to{transform:rotate(360deg);}}
+
+  /* Custom Modal */
+  .custom-modal{
+    position:fixed;inset:0;background:rgba(20,8,8,.85);
+    display:none;align-items:center;justify-content:center;
+    z-index:1001;padding:1rem;
+  }
+  .custom-modal.show{display:flex;}
+  .custom-modal-content{
+    background:var(--paper);padding:2rem;
+    max-width:400px;width:100%;position:relative;
+    border:1px solid var(--gold);
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+  }
+  .custom-close{
+    position:absolute;top:10px;right:15px;
+    font-size:1.8rem;color:var(--wine);cursor:pointer;line-height:1;
+  }
 
   /* Floating particles */
   .particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
@@ -308,20 +357,6 @@
     padding:1rem 1.25rem;margin-bottom:.75rem;
   }
 
-  /* Floating envelope icon on cover */
-  .envelope-icon{
-    width:60px;height:60px;
-    display:flex;align-items:center;justify-content:center;
-    border:1px solid var(--gold-soft);border-radius:50%;
-    margin:0 auto 1rem;
-    color:var(--gold-soft);font-size:1.3rem;
-    animation:gentleBounce 2.5s ease-in-out infinite;
-  }
-  @keyframes gentleBounce{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-6px);}
-  }
-
   /* Section padding */
   .section{padding:4rem 1.25rem;position:relative;z-index:2;}
   .container-max{max-width:480px;margin:0 auto;}
@@ -348,6 +383,11 @@
     font-style:normal;font-weight:300;
   }
 
+  @keyframes gentleBounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-6px);}
+  }
+
   @media (min-width:640px){
     .container-max{max-width:560px;}
     .section{padding:5rem 2rem;}
@@ -366,9 +406,12 @@
 <!-- Floating particles -->
 <div class="particles" id="particles"></div>
 
-<!-- Music button -->
+<!-- Music & Custom Button -->
 <button id="musicBtn" class="music-btn" aria-label="Toggle music" style="display:none;">
   <i class="fas fa-music"></i>
+</button>
+<button id="customBtn" class="custom-btn" aria-label="Customize Thumbnail">
+  <i class="fas fa-cog"></i>
 </button>
 
 <!-- ============ SECTION 1 : COVER ============ -->
@@ -380,8 +423,9 @@
   <div style="position:relative;z-index:2;">
     <p style="font-family:'Playfair Display',serif;letter-spacing:.5em;font-size:.7rem;color:var(--gold-soft);margin-bottom:1.5rem;text-transform:uppercase;">The Wedding of</p>
 
-    <div class="envelope-icon">
-      <i class="fas fa-envelope-open-text"></i>
+    <!-- Customizable Thumbnail -->
+    <div class="cover-thumbnail">
+      <img id="coverThumbImg" src="https://z-cdn-media.chatglm.cn/files/547da36e-23c5-4b31-a827-98cefaec0237.png?auth_key=1885845643-e16ab9f7aed745e1bc52ebd0d75854ce-0-81ccbb714c6f6ab98332ec7524fa0792" alt="Foto Pernikahan">
     </div>
 
     <h1 class="cover-names">
@@ -904,6 +948,36 @@
 
 </div><!-- /mainContent -->
 
+<!-- ============ CUSTOMIZATION MODAL ============ -->
+<div id="customModal" class="custom-modal">
+  <div class="custom-modal-content">
+    <span class="custom-close" id="customClose">&times;</span>
+    <h3 class="font-display text-center" style="color:var(--wine);font-size:1.5rem;">Kustomisasi Undangan</h3>
+    <div class="ornament" style="margin-top:.5rem; margin-bottom:1.5rem;">
+      <span class="line"></span>
+      <i class="fas fa-feather-alt"></i>
+      <span class="line right"></span>
+    </div>
+
+    <div style="margin-bottom:1rem;">
+      <label style="font-family:'Playfair Display',serif;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);">URL Thumbnail (Link Preview WA/Sosmed)</label>
+      <input type="text" id="inputOgImage" class="form-input" placeholder="https://link-gambar-anda.jpg" style="margin-top:.4rem;">
+    </div>
+
+    <div style="margin-bottom:1.5rem;">
+      <label style="font-family:'Playfair Display',serif;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);">URL Foto Thumbnail di Cover</label>
+      <input type="text" id="inputCoverThumb" class="form-input" placeholder="https://link-gambar-anda.jpg" style="margin-top:.4rem;">
+    </div>
+
+    <button id="saveCustomBtn" class="btn-gold w-full">
+      <i class="fas fa-save mr-2"></i>Simpan Perubahan
+    </button>
+    <p style="font-size:.7rem;color:var(--ink-soft);margin-top:1rem;text-align:center;font-style:italic;">
+      Catatan: Untuk perubahan Link Preview (WA) yang permanen, Anda tetap perlu mengedit URL langsung di dalam kode HTML bagian <code>&lt;meta property="og:image"&gt;</code>.
+    </p>
+  </div>
+</div>
+
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
   <button class="lightbox-close" onclick="closeLightbox(event)">
@@ -937,6 +1011,7 @@
     document.getElementById('mainContent').style.display = 'block';
     document.getElementById('cover').style.display = 'none';
     musicBtn.style.display = 'flex';
+    
     // Start music
     bgMusic.play().then(()=>{
       isPlaying = true;
@@ -1005,6 +1080,7 @@
     const text = document.getElementById(id).textContent;
     navigator.clipboard.writeText(text).then(()=>{
       const toast = document.getElementById('copyToast');
+      toast.textContent = "Nomor berhasil disalin!";
       toast.style.opacity = '1';
       toast.style.transform = 'translateX(-50%) translateY(0)';
       setTimeout(()=>{
@@ -1079,6 +1155,57 @@
     div.textContent = str;
     return div.innerHTML;
   }
+
+  // ===== Customization Feature =====
+  const customBtn = document.getElementById('customBtn');
+  const customModal = document.getElementById('customModal');
+  const customClose = document.getElementById('customClose');
+  const saveCustomBtn = document.getElementById('saveCustomBtn');
+  const coverThumbImg = document.getElementById('coverThumbImg');
+  const ogImageMeta = document.querySelector('meta[property="og:image"]');
+
+  // Apply saved settings on load (Local Storage)
+  const savedOg = localStorage.getItem('customOgImage');
+  const savedCover = localStorage.getItem('customCoverThumb');
+  if(savedOg) ogImageMeta.setAttribute('content', savedOg);
+  if(savedCover && coverThumbImg) coverThumbImg.src = savedCover;
+
+  customBtn.addEventListener('click', () => {
+    customModal.classList.add('show');
+    document.getElementById('inputOgImage').value = ogImageMeta.getAttribute('content');
+    document.getElementById('inputCoverThumb').value = coverThumbImg.src;
+  });
+
+  customClose.addEventListener('click', () => customModal.classList.remove('show'));
+  customModal.addEventListener('click', (e) => {
+    if(e.target === customModal) customModal.classList.remove('show');
+  });
+
+  saveCustomBtn.addEventListener('click', () => {
+    const ogUrl = document.getElementById('inputOgImage').value;
+    const coverUrl = document.getElementById('inputCoverThumb').value;
+    
+    if(ogUrl) {
+      localStorage.setItem('customOgImage', ogUrl);
+      ogImageMeta.setAttribute('content', ogUrl);
+    }
+    if(coverUrl) {
+      localStorage.setItem('customCoverThumb', coverUrl);
+      coverThumbImg.src = coverUrl;
+    }
+    
+    customModal.classList.remove('show');
+    
+    // Show toast notification
+    const toast = document.getElementById('copyToast');
+    toast.textContent = "Thumbnail berhasil diperbarui!";
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(()=>{
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2500);
+  });
 
   // ===== Get guest name from URL parameter =====
   const urlParams = new URLSearchParams(window.location.search);
